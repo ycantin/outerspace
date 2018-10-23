@@ -1,0 +1,270 @@
+@charset "utf-8";
+
+/*******************************
+ * general settings
+ *******************************/
+html,body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,form,a,img {
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    font-weight: normal;
+    font-style: normal;
+    font-size: medium;
+    font-family: Arial, Helvetica, sans-serif;
+    /*font: 12px Arial, Helvetica, sans-serif;*/
+    text-align: justify;
+    background: url(background.jpg) no-repeat center top;
+    background-color: #181829;
+    color: #ffffff;
+}
+
+a {
+    color:#8fb6e5;
+    text-decoration:underline;
+}
+
+a:hover {
+    text-decoration:none;
+}
+
+/*******************************
+ * panel
+ *******************************/
+.panel {
+    /*width: 90%;*/
+    margin-left: 4em;
+    margin-right: 4em;
+    margin-top: 2em;
+    background: url(block_bg.png) repeat;
+    -moz-border-radius:7px 7px 7px 7px;
+    border-radius:7px 7px 7px 7px;
+    border:1px solid #3d444e;
+}
+
+.panel-title {
+    padding: 0.5em;
+    font-weight: bold;
+    background: url(top_bar_bg.png) repeat;
+    background-size: auto 100%;
+    border-radius:7px 7px 0px 0px;
+    text-shadow: 0px 1px 1px #fff;
+    color: #737373;
+}
+
+.panel-title .nav {
+    float: right;
+}
+
+.panel-title .nav a {
+    text-decoration:none;
+    color: inherit;
+}
+
+.panel-header {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 0.5em;
+}
+
+.panel-content {
+    margin: 1.5em;
+}
+
+/*******************************
+ * block
+ *******************************/
+.block {
+    margin-top: 1em;
+    background: url(block_bg.png) repeat;
+    -moz-border-radius:7px 7px 7px 7px;
+    border-radius:7px 7px 7px 7px;
+    border:1px solid #3d444e;
+}
+
+.block-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 0.5em;
+}
+
+.block-content {
+    margin-left: 2em;
+    margin-right: 2em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+
+/*******************************
+ * tech page specific
+ *******************************/
+.panel-header .advance {
+    font-size: 0.5em;
+}
+
+.panel-header .type {
+    font-size: 0.5em;
+    padding-top: 0.5em;
+}
+
+.panel-header .races {
+    font-size: 0.5em;
+    padding-top: 0.5em;
+}
+
+.racelist {
+   display: inline;
+}
+
+.racelist li {
+   display: inline;
+   text-align: center;
+   padding: 0.1em;
+}
+
+.improvlist {
+   display: inline;
+}
+
+.improvlist li {
+   display: inline;
+   text-align: center;
+   padding: 1em;
+}
+
+.techlist {
+    padding-left: 2em;
+    line-height: 150%;
+}
+
+.stratlist {
+    padding-left: 2em;
+    line-height: 150%;
+}
+
+.prodmodlist {
+    padding-left: 2em;
+    line-height: 150%;
+}
+
+.spectable {
+    border-collapse: collapse;
+    text-align: center;
+    table-layout: auto;
+    width: 100%
+}
+
+.spectable tr, th, td {
+    border: 1px solid #3d444e;
+}
+
+.spectable table {
+}
+
+.spectable tr {
+    line-height: 1.5em;
+}
+
+.spectable tr:not(:first-child):hover {
+    background-color: #3d444e;
+}
+
+.spectable th {
+    line-height: 1em;
+}
+
+.spectable td:not(:first-child) {
+  width: 10%;
+}
+
+.spectable td {
+}
+
+.spectable td:first-child {
+    text-align: left;
+    padding-left: 0.5em;
+}
+
+.desc-txt {
+    padding-left: 2em;
+    line-height: 150%;
+    font-style: italic;
+}
+
+/*******************************
+ * TL index specific
+ *******************************/
+.panel-header .tllinks {
+    font-size: 0.5em;
+    padding-top: 0.5em;
+}
+
+.tllist {
+   display: inline;
+}
+
+.tllist li {
+   display: inline;
+   text-align: center;
+   padding: 1em;
+}
+
+.tltechlist {
+    padding-left: 2em;
+    line-height: 150%;
+    columns: 3;
+}
+
+.tltechlist li {
+    list-style-type: none;
+}
+
+/*******************************
+ * Global index specific
+ *******************************/
+.linklist {
+    padding-left: 2em;
+    line-height: 150%;
+    columns: 3;
+}
+
+.linklist li {
+    list-style-type: none;
+}
+
+.imglist {
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-top: 2em;
+    text-align: left;
+}
+
+.imglist img {
+    width: 100%;
+}
+
+/* footer */
+.footer {
+    margin-left: 4em;
+    margin-right: 4em;
+    margin-bottom: 2em;
+    padding: 0.5em;
+    background: url(block_bg.png) repeat;
+    -moz-border-radius:7px 7px 7px 7px;
+    border-radius:7px 7px 7px 7px;
+    border:1px solid #3d444e;
+}
+
+.footer .copyright {
+    font-size: smaller;
+}
+
+.footer .nav {
+    float: right;
+}
+

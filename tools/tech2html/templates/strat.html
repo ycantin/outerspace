@@ -1,0 +1,37 @@
+{% extends "basetemplate.html" %}
+
+{% block panel_title %}Outer Space Technology{% endblock %}
+
+{% block panel_header %}
+    <div class="name">
+        Technologies using {{ strat }}, listed by TL
+        <div class="tllinks">
+            <ul class="tllist">
+                {% for tl in techs.keys()|sort %}
+                    <li>
+                        <a href="#TL{{tl}}">TL{{tl}}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block panel_content %}
+    {% for tl in techs.keys()|sort %}
+        <div id="TL{{tl}}" class="block">
+            <div class="block-title">
+                TL{{tl}}
+            </div>
+            <div class="block-content">
+                <ul class="tltechlist">
+                    {% for tech in techs[tl] %}
+                        <li>
+                             <a href="{{tech.id}}.html">{{ tech.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="STYLESHEET" href="styles/styles.css" type="text/css">
+</head>
+<body>
+    <div class="panel">
+
+        <div class="panel-title">
+            {% block panel_title %}{% endblock %}
+            <div class=nav>::&nbsp;
+                {% for name, link in nav %}
+                    <a href="{{ link }}">{{ name }}</a>&nbsp;::
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="panel-header">
+            {% block panel_header %}
+            {% endblock %}
+        </div>
+            
+        <div class="panel-content">
+            {% block panel_content %}
+            {% endblock %}
+        </div>
+    </div>
+    <div class="footer">
+        <span class="copyright">&copy; 2001 - 2016 Ludek Smid, &copy; 2018 Yann Cantin &lt;yann.cantin@laposte.net&gt;</span>
+        <div class=nav>
+            ::&nbsp;<a href="techtree.html">Home</a>&nbsp;::&nbsp;<a href="index_tl.html">All</a>&nbsp;::
+        </div>
+    </div>
+</body>
+</html>

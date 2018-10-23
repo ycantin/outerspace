@@ -1,0 +1,226 @@
+{% extends "basetemplate.html" %}
+
+{% block panel_title %}Outer Space Technology{% endblock %}
+
+{% block panel_header %}
+    <div class="name">
+        {{ tech.name }} (TL{{ tech.tl }})
+        {% if tech.advanceTl %}
+            <div class="advance">
+                Will advance player to TL {{ tech.tl +1 }}
+            </div>
+        {% endif %}
+    </div>
+    <div class="type">
+        Type : <a href="index_{{tech.typeFilename}}.html">{{ tech.typeStr }}</a>
+    </div>
+    <div class="races">
+        Available to :
+        <ul class="racelist">
+            {% for rtxt, rfn in tech.racesStr %}
+                <li><a href="index_{{rfn}}.html">{{ rtxt }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
+
+{% block panel_content %}
+    <div id="research" class="block">
+        <div class="block-title">
+            Research
+        </div>
+        <div class="block-content">
+            <div id="rcost">
+                Costs (by improvement) :
+                <ul class="improvlist">
+                    {% for improvement, cost in tech.costs.iteritems() %}
+                        <li>{{ improvement }} : {{ cost }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="block-content">
+            <div id="rreq">
+                {% if (tech.researchRequires|length > 0) or (tech.researchReqSRes|length > 0) %}
+                    Requires :
+                    <ul class="techlist">
+                        {% for id, level, name, improvement in tech.researchRequires %}
+                            <li>
+                                <a href={{ id }}.html>{{ name }}</a> (TL{{ level }}) at improvement {{ improvement }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <ul class="stratlist">
+                        {% for id, name, fname in tech.researchReqSRes %}
+                            <li>
+                                <a href="index_{{ fname}}.html">{{ name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    Requires : None
+                {% endif %}
+            </div>
+        </div>
+        <div class="block-content">
+            <div id="renable">
+                {% if (tech.researchEnables|length > 0) %}
+                    Enable :
+                    <ul class="techlist">
+                        {% for id, level, name, improvement, reseachRaces, reseachRacesTxt in tech.researchEnables %}
+                            <li>
+                                <a href={{ id }}.html>{{ name }}</a> (TL{{ level }}) at improvement {{ improvement }} for
+                                <ul class="racelist">
+                                    {% for rtxt, rfn in reseachRacesTxt %}
+                                        <li><a href="index_{{rfn}}.html">{{ rtxt }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    Enable : None
+                {% endif %}
+            </div>
+        </div>
+        <div class="block-content">
+            <div id="rdisable">
+                {% if (tech.researchDisables|length > 0) %}
+                    Disable :
+                    <ul class="techlist">
+                        {% for id, level, name in tech.researchDisables %}
+                            <li>
+                                <a href={{ id }}.html>{{ name }}</a> (TL{{ level }})
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    Disable : None
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div id="prod" class="block">
+        <div class="block-title">
+            Production
+        </div>
+        {% if tech.canBeBuild == true %}
+            <div class="block-content">
+                <div id="cpreq">
+                    Construction points : {{ tech.buildCP }}
+                </div>
+            </div>
+            {% for id, name, ammount, fname in tech.buildSRes %}
+                <div class="block-content">
+                    <div id="stratresreq">
+                        <a href="index_{{ fname}}.html">{{ name }}</a> : {{ ammount }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="block-content">
+                <div id="cpreq">
+                    None.
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+    <div id="specs" class="block">
+        <div class="block-title">
+            Specifications
+        </div>
+        {% if (tech.specs|length > 0) %}
+            <div class="block-content">
+                {% if (tech.prodBioMod|length > 0) or (tech.prodEnMod|length > 0) or (tech.prodProdMod|length > 0) or (tech.prodSciMod|length > 0) %}
+                    <div class="prodmod">
+                        {% for type, mod in [('Bio production', tech.prodBioMod), ('Energy production', tech.prodEnMod), ('Construction points production', tech.prodProdMod), ('Research points production', tech.prodSciMod)] %}
+                            {% if (mod|length > 0) %}
+                                {{type}} depends :
+                                <ul class="prodmodlist">
+                                    {% if mod[0] > 0 %}
+                                        <li>
+                                            {{ (mod[0] * 100)|int }} % on planet's environment
+                                        </li>
+                                    {% endif %}
+                                    {% if mod[1] > 0 %}
+                                        <li>
+                                            {{ (mod[1] * 100)|int }} % on planet's min. abundance
+                                        </li>
+                                    {% endif %}
+                                    {% if mod[2] > 0 %}
+                                        <li>
+                                            {{ (mod[2] * 100)|int }} % on planet's en. abundance
+                                        </li>
+                                    {% endif %}
+                                    {% if mod[3] > 0 %}
+                                        <li>
+                                            {{ (mod[3] * 100)|int }} % not dependent on any planet's attribute
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="block-content">
+                <div class="spec">
+                    <table class="spectable">
+                        <tr>
+                            <th></th>
+                            {% for improv in range(1,maxImprovement+1) %}
+                                <th>{{ improv }}</th>
+                            {% endfor %}
+                        </tr>
+                        {% for uisort, txt, EFF, value, values in tech.specs %}
+                            <tr>
+                                {% if EFF %}
+                                    <td>{{ txt }}</td>
+                                    {% for improvement, tmpValue in values.iteritems() %}
+                                        <td>{{ tmpValue }}</td>
+                                    {% endfor %}
+                                    </td>
+                                {% else %}
+                                    <td>{{ txt }}</td>
+                                    <td colspan="{{maxImprovement}}">{{ value }}</td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </table>
+            </div>
+        </div>
+        {% else %}
+            <div class="block-content">
+                <div id="spec">
+                    None.
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+    <div id="descr" class="block">
+        <div class="block-title">
+            Description
+        </div>
+        <div class="block-content">
+            <div>
+                Abstract :
+                <div class="desc-txt">{{tech.textPreRsrch}}</div>
+            </div>
+        </div>
+        <div class="block-content">
+            <div>
+                Details :
+                <div class="desc-txt">{{tech.textDescr}}</div>
+            </div>
+        </div>
+        <div class="block-content">
+            <div>
+                Rumours :
+                <div class="desc-txt">{{tech.textFlavor}}</div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

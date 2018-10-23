@@ -33,4 +33,7 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 
+#Eric
+*.e4p
+.eric6project/
 

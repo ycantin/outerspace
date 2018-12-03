@@ -182,6 +182,7 @@ addAttr('minHull',              1002, _('Minimum required hull'), V_SEQUIP|V_HUL
 addAttr('weight',               1003, _('Weight'), V_SEQUIP|V_HULL, 0)
 addAttr('slots',                1004, _('Slots'), V_SEQUIP|V_HULL, 0)
 addAttr('engPwr',               1005, _('Engine power'), V_SEQUIP|V_EFF, 0)
+addAttr('engStlPwr',            1006, _('Engine STL power'), V_SEQUIP|V_EFF, 0)
 
 addAttr('signature',            2000, _('Scan signature'), V_SEQUIP|V_HULL, 0)
 addAttr('signatureCloak',       2001, _('Signature visibility'), V_SEQUIP|V_HULL, 0)
